@@ -173,13 +173,11 @@ class AVCAffe(VideoDataset):
 
         self_score =  np.vstack((task_ids, holder)).T
         name_list = classes[class_name] if class_name in classes.keys() else None
-        lookup_table =  list_to_dict(self_score, name_list,'class_name',class_name)
-        print('lookup_table',lookup_table,)
+        lookup_table =  list_to_dict(self_score, name_list)
         labels, ids, pid_task_names = [], [], []
         for mf in media_files:
             # labels.append(label_group(lookup_table['_'.join(mf.split('/')[:-1])], class_name=class_name))
             labels.append(lookup_table['_'.join(mf.split('/')[:-1])])
-            print(labels)
             ids.append(int(mf.split('/')[0][4:]))
             pid = float(mf.split('/')[0][4:])+float(mf.split('/')[1][5:])/10 # this makes aiim005_task_1 --> 5.1
             pid_task_names.append(pid)
