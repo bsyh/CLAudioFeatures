@@ -115,7 +115,7 @@ class AVCAffe(VideoDataset):
 
         """
 
-        assert cogload_class_type in ['binary', 'continuous', 'original']
+        assert cogload_class_type in ['binary', 'continuous', 'original','4-tier']
         # arousal valence class names
         classes = {
                     'arousal': ['Excited', 'Wide-awake', 'Neutral', 'Dull', 'Calm'],
@@ -183,12 +183,27 @@ class AVCAffe(VideoDataset):
             pid_task_names.append(pid)
 
         if class_name not in ['arousal', 'valence']:
+            
             if cogload_class_type=='binary':
                 labels = [int(k>10) for k in labels]
             elif cogload_class_type=='continuous':
                 labels = [k/21 for k in labels]
             elif cogload_class_type=='original':
                 labels = [k for k in labels]
+                
+            elif cogload_class_type=='4-tier':
+                labels_orig = labels[:]
+                labels = []
+                for i in labels_orig:
+                    if 0<=i<=6:
+                        labels.append(0)
+                    elif 6<i<=10:
+                        labels.append(1)
+                    elif 10<i<=16:
+                        labels.append(2)
+                    elif 16<i<=22:
+                        labels.append(3)
+
 
 
         super(AVCAffe, self).__init__(
