@@ -1,6 +1,6 @@
 # CL_AUDIO_PREDICTION
 
-This repository is a prediction (classification) model of audio waves regarding cognitive loads (mental demands).<br>
+This repository is a prediction (classification) model of audio waves regarding cognitive loads (mental demands) using CNN from [this paper](https://arxiv.org/pdf/1610.00087.pdf).<br>
 `train.ipynb`: the trainer using `pytorch`, `torchaudio`, GPU and `CUDA`.<br>
 `epoch/`: traned model stoped at some certain epochs.<br>
 `ACVAffe/codes` the ACVAffe dataset downloader and dataloader for pytorch. (modified)<br>
